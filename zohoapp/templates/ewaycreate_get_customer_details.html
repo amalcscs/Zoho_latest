@@ -1,0 +1,30 @@
+<div class="row mt-2" id="cemail_row">
+    <div class="col-md-3">
+      <label for="cemail_inp">Customer Email</label>
+    </div>
+    <div class="col-md-6">
+      <input type="email" class="form-control text-dark bg-light" value="{{ cust.customerEmail }}"  id="cemail_inp" name="cemail"  >
+    </div>
+  </div>
+  
+  {% if cust.GSTTreatment %}
+  <div class="row mt-2" id="cgst_trt_row">
+    <div class="col-md-3">
+      <label for="gst_trt_inp">GST Treatment</label>
+    </div>
+    <div class="col-md-6">
+      <input type="text" class="form-control text-dark bg-light" value="{{ cust.GSTTreatment }}" id="cgst_trt_inp" name="cgst_trt_inp"  >
+    </div>
+  </div>
+  {% endif %}
+
+  {% if cust.GSTIN %}
+  <div class="row mt-2 mb-2" id="cgstin_row">
+    <div class="col-md-3">
+      <label for="gstin_inp">GST Number</label>
+    </div>
+    <div class="col-md-6">
+      <input type="text" class="form-control text-dark bg-light" value="{{ cust.GSTIN }}"  id="cgstin_inp" name="cgstin_inp" >
+    </div>
+  </div>
+  {% endif %}

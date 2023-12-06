@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row text-start text-uppercase">
+    <div class="col-sm-12" >
+        <h3 class="mt-1 text-center">Edit Transaction</h3>
+    </div>
+</div>
+
+<form action="{% url 'updateLoanAccountTransaction' trans.id %}" method="post">
+    {% csrf_token %}
+    <div class="row mt-5 d-flex justify-content-center">
+        <div class="col-sm-6">
+            <div class="from-group">
+                <label for="">Type</label>
+                <input type="text" class="form-control text-dark" readonly name="trans_type" value="{{trans.type}}" id="">
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2 d-flex justify-content-center">
+        <div class="col-sm-6">
+            <div class="from-group">
+                <label for="">Date</label>
+                <input class="form-control text-dark" type="date" value="{{trans.date|date:'Y-m-d'}}" name="trans_date" id="transDate">
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2 d-flex justify-content-center">
+        <div class="col-sm-6">
+            <div class="from-group">
+                <label for="">Principal Amount</label>
+                <input class="form-control text-dark" type="number" min="0" step="any" value="{{trans.principal}}" required onkeyup="calc()" name="principal_amount" id="transPrincipalAmount">
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2 d-flex justify-content-center">
+        <div class="col-sm-6">
+            <div class="from-group">
+                <label for="">Interest</label>
+                <input class="form-control text-dark" type="number" min="0" step="any" value="{{trans.interest}}" required onkeyup="calc()" name="trans_interest" id="transInterest">
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2 d-flex justify-content-center">
+        <div class="col-sm-6">
+            <div class="from-group">
+                <label for="">Total</label>
+                <input class="form-control text-dark" readonly type="number" value="{{trans.total}}" name="trans_total" id="transTotal">
+            </div>
+        </div>
+    </div>
+
+    
+
+
+
+
+
+    <div class="row mt-5">
+        <div class="col-sm-12" style="text-align: center;">
+            <input type="reset" style="width: 150px; height: 40px;" onclick="window.location.href=`{% url 'viewLoanAccount' trans.loan_account.id %}`" class="btn btn-outline-primary" value="CANCEL">
+            <input type="submit" style="width: 150px; height: 40px;" class="btn btn-success" value="SAVE">
+        </div>
+    </div>
+</form>
+
+<script>
+    function calc(){
+        var amount = $('#transPrincipalAmount').val();
+        var int = $('#transInterest').val();
+        if (amount == ""){
+            amount = 0
+        }
+        if (int == ""){
+            int = 0
+        }
+
+        $('#transTotal').val(parseFloat(amount)+parseFloat(int))
+    }
+</script>
+
+{% endblock %}
